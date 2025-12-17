@@ -1,5 +1,6 @@
 # core/proposal.py
 from pydantic import BaseModel, Field, ConfigDict
+from core.enums import ProposalStatus, ExecutorType
 from typing import Optional, Dict, Any
 from uuid import UUID, uuid4
 from datetime import datetime
@@ -15,7 +16,7 @@ class Proposal(BaseModel):
     # 核心内容
     # Core content
     type: str             # 例如: "feed", "trade", "tweet" / e.g.: "feed", "trade", "tweet"
-    status: str = "pending"
+    status: ProposalStatus = ProposalStatus.PENDING_USER
     payload: Dict[str, Any] = {}  # 具体的动作参数，比如 {"food_type": "steak"} / Specific action params, e.g. {"food_type": "steak"}
     
     # AI 的自我评估
@@ -27,3 +28,7 @@ class Proposal(BaseModel):
     # Timestamp
     created_at: datetime = Field(default_factory=datetime.now)
     expires_at: Optional[datetime] = None
+
+    # 执行器
+    # executor
+    executor: ExecutorType = ExecutorType.FEED

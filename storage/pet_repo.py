@@ -23,6 +23,11 @@ def load_pet(pet_id: str) -> Optional[Pet]:
         print(f"❌ 读取宠物数据失败 / Failed to load pet data: {e}")
         return None
 
+def update_pet_state(pet: Pet):
+    # 更新宠物状态（包装函数，保持 API 一致性）
+    # Update pet state (wrapper function for API consistency)
+    save_pet_state(pet)
+
 def save_pet_state(pet: Pet):
     # 将对象转回字典存入库
     # Convert object back to dictionary for storage
